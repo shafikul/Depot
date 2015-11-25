@@ -16,3 +16,11 @@ Product.create(title: 'Programming Ruby 1.9',
                     </p>},
                image_url: 'ruby.jpg',
                price: 49.95)
+
+Product.create(title: 'Lorem Ipsum',
+               description:
+                   %{<p>
+                        'Wibbles are fun!'
+                    </p>},
+               image_url: 'rtp.jpg',
+               price: 19.95)
