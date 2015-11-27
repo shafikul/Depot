@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Depot</title>
+  <title>Pragprog Books Online Store </title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -9,8 +9,14 @@
 
 <body class="<%= controller.controller_name%>" >
 <div id="banner">
+  <%= form_tag store_path, class: 'locale' do %>
+      <%= select_tag 'set_locale', options_for_select(LANGUAGES, I18n.locale.to_s),
+                     onchange: 'this.form.submit()' %>
+      <%= submit_tag 'submit' %>
+      <%= javascript_tag "$('.locale input').hide()" %>
+  <% end %>
   <%= image_tag("logo.png")%>
-  <%= @page_title || "Pragmatic Bookshelf" %>
+  <%= @page_title || t('.title') %>
 </div>
 <div id="columns">
   <div id="side">
@@ -20,11 +26,19 @@
     <% end %>
         <% end %>
     <ul>
-      <li><a herf="http://www....">Home</a></li>
-      <li><a herf="http://www..../faq">Questions</a></li>
-      <li><a herf="http://www..../news">News</a></li>
-      <li><a herf="http://www..../contact">Contact</a></li>
+      <li><a herf="http://www...."><%= t('.home')%></a></li>
+      <li><a herf="http://www..../faq"><%= t('.questions') %></a></li>
+      <li><a herf="http://www..../news"><%= t('.news') %></a></li>
+      <li><a herf="http://www..../contact"><%= t('.contact')%></a></li>
     </ul>
+    <%if session[:user_id] %>
+    <ul>
+        <li><%= link_to 'Orders', orders_path %></li>
+        <li><%= link_to 'Products', products_path %></li>
+        <li><%= link_to 'Users', users_path %></li>
+    </ul>
+    <%= button_to 'Logout', logout_path, method: :delete%>
+    <% end %>
   </div>
 <div id="main">
 <%= yield %>

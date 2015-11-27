@@ -1,17 +1,12 @@
 class LineItemsController < ApplicationController
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
-
-
-
+  skip_before_filter :authorize, only: :create
   def index
     @line_items = LineItem.all
   end
 
-
-
   def show
   end
-
 
   def new
     @line_item = LineItem.new
@@ -19,8 +14,6 @@ class LineItemsController < ApplicationController
 
   def edit
   end
-
-
 
   def create
     @cart = current_cart
@@ -39,8 +32,6 @@ class LineItemsController < ApplicationController
     end
   end
 
-
-
   def update
     respond_to do |format|
       if @line_item.update(line_item_params)
@@ -52,8 +43,6 @@ class LineItemsController < ApplicationController
       end
     end
   end
-
-
 
   def destroy
     @line_item.destroy
@@ -68,8 +57,6 @@ class LineItemsController < ApplicationController
     def set_line_item
       @line_item = LineItem.find(params[:id])
     end
-
-
     def line_item_params
       params.require(:line_item).permit(:product_id, :cart_id)
     end
