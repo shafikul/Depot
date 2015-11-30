@@ -7,6 +7,5 @@ class StoreController < ApplicationController
       @products = Product.order(:title)
       @cart = current_cart
     end
-
   end
 end

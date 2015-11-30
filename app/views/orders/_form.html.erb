@@ -2,7 +2,8 @@
   <% if @order.errors.any? %>
     <div id="error_explanation">
       <h2><%= raw t('errors.template.header', count: @order.errors.count,
-                    model: t('activerecord.models.order')) %></h2>
+                    model: t('activerecord.models.order')) %>.</h2>
+
 
       <p><%= t('errors.template.body')%></p>
 

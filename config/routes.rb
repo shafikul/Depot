@@ -6,19 +6,18 @@ Rails.application.routes.draw do
   post 'login' => :create
   delete 'logout' => :destroy
   end
+  get 'sessions/create'
+  get 'sessions/destroy'
 
-  scope '(:locale)' do
   resources :users
-  resources :orders
-  resources :line_items
-  resources :carts
-  get 'store/index'
-
   resources :products do
     get :who_bought, on: :member
   end
 
-  root to: 'store#index', as: 'store'
-
+  scope '(:locale)' do
+  resources :orders
+  resources :line_items
+  resources :carts
+  root to: 'store#index', as: 'store', via: :all
   end
 end
